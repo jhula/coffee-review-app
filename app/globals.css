@@ -4,5 +4,35 @@
 @theme {
   --color-coffee: #C45B2E;
 
-  --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-family-sans: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+}
+
+/* ── BRUTALIST GLOBAL OVERRIDES ── */
+
+/* Kill all border-radius */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
+/* Kill all box shadows */
+*,
+*::before,
+*::after {
+  box-shadow: none !important;
+}
+
+/* Kill all transitions */
+*,
+*::before,
+*::after {
+  transition: none !important;
+}
+
+/* Bold text selection */
+::selection {
+  background-color: #c45b2e;
+  color: white;
 }

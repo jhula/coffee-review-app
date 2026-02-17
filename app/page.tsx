@@ -135,18 +135,18 @@ export default async function HomePage({ searchParams }: PageProps) {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+        <h1 className="text-4xl font-black text-black dark:text-white mb-2 uppercase tracking-tight">
           Recenze kávy
         </h1>
-        <p className="text-gray-500 dark:text-gray-400">
+        <p className="text-black dark:text-white border-b-2 border-coffee pb-2 inline-block">
           Nejlepší recenze výběrové kávy z celého světa
         </p>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
         <aside className="lg:w-64 flex-shrink-0">
-          <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 p-4 sticky top-24">
-            <h2 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">
+          <div className="bg-white dark:bg-black border-[3px] border-black dark:border-white p-4 sticky top-24">
+            <h2 className="font-black text-black dark:text-white mb-4 uppercase tracking-wide border-b-2 border-coffee pb-2">
               Filtry
             </h2>
             <Suspense>
@@ -173,16 +173,16 @@ export default async function HomePage({ searchParams }: PageProps) {
               <p className="text-4xl mb-4" aria-hidden="true">
                 ☕
               </p>
-              <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              <h2 className="text-xl font-black text-black dark:text-white mb-2 uppercase">
                 Žádné recenze nenalezeny
               </h2>
-              <p className="text-gray-500 dark:text-gray-400">
+              <p className="text-black dark:text-white">
                 Zkuste změnit filtry nebo vyhledávací dotaz.
               </p>
             </div>
           ) : (
             <>
-              <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+              <div className="text-sm text-black dark:text-white mb-4 font-bold uppercase tracking-wide">
                 Nalezeno {filtered.length} recenzí
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">

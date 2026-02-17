@@ -27,7 +27,7 @@ export default function UserNote({ slug }: UserNoteProps) {
   return (
     <div className="mt-4 space-y-3">
       <div>
-        <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
+        <p className="text-sm font-bold text-black dark:text-white mb-1 uppercase tracking-wide">
           Moje hodnocení
         </p>
         <StarRating
@@ -37,7 +37,7 @@ export default function UserNote({ slug }: UserNoteProps) {
       </div>
 
       <div>
-        <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
+        <p className="text-sm font-bold text-black dark:text-white mb-1 uppercase tracking-wide">
           Moje poznámka
         </p>
 
@@ -46,23 +46,23 @@ export default function UserNote({ slug }: UserNoteProps) {
             <textarea
               value={noteText}
               onChange={(e) => setNoteText(e.target.value.slice(0, 500))}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none focus:outline-none focus:ring-2 focus:ring-coffee"
+              className="w-full p-2 border-2 border-black dark:border-white text-sm bg-white dark:bg-black text-black dark:text-white resize-none focus:outline-none focus:border-coffee font-mono"
               rows={3}
               placeholder="Přidat poznámku..."
               maxLength={500}
             />
             <div className="flex items-center justify-between">
-              <span className="text-xs text-gray-400">{noteText.length}/500</span>
+              <span className="text-xs text-black/50 dark:text-white/50 font-bold">{noteText.length}/500</span>
               <div className="flex gap-2">
                 <button
                   onClick={handleCancel}
-                  className="text-sm px-3 py-1 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                  className="text-sm px-3 py-1 text-black dark:text-white border-2 border-black dark:border-white font-bold uppercase hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
                 >
                   Zrušit
                 </button>
                 <button
                   onClick={handleSave}
-                  className="text-sm px-3 py-1 bg-coffee text-white rounded-lg hover:bg-opacity-90"
+                  className="text-sm px-3 py-1 bg-coffee text-white font-bold uppercase border-2 border-black hover:bg-black hover:text-coffee"
                 >
                   Uložit
                 </button>
@@ -75,11 +75,11 @@ export default function UserNote({ slug }: UserNoteProps) {
             className="cursor-pointer group"
           >
             {favourite?.userNote ? (
-              <p className="text-sm text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800 rounded-lg p-2 group-hover:bg-gray-100 dark:group-hover:bg-gray-700 transition-colors">
+              <p className="text-sm text-black dark:text-white bg-white dark:bg-black border-2 border-black dark:border-white p-2 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black">
                 {favourite.userNote}
               </p>
             ) : (
-              <p className="text-sm text-gray-400 italic bg-gray-50 dark:bg-gray-800 rounded-lg p-2 group-hover:bg-gray-100 dark:group-hover:bg-gray-700 transition-colors">
+              <p className="text-sm text-black/50 dark:text-white/50 bg-white dark:bg-black border-2 border-dashed border-black dark:border-white p-2 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black">
                 Klikněte pro přidání poznámky...
               </p>
             )}
@@ -108,13 +108,13 @@ function StarRating({
           onMouseEnter={() => setHover(star)}
           onMouseLeave={() => setHover(0)}
           aria-label={`${star} hvězdiček`}
-          className="text-xl transition-colors"
+          className="text-xl"
         >
           <span
             className={
               star <= (hover || rating)
-                ? "text-yellow-400"
-                : "text-gray-300 dark:text-gray-600"
+                ? "text-coffee"
+                : "text-black/20 dark:text-white/20"
             }
           >
             ★

@@ -55,7 +55,7 @@ export default function OblíbenéPage() {
   if (!mounted) {
     return (
       <div className="text-center py-16">
-        <div className="animate-spin w-8 h-8 border-4 border-coffee border-t-transparent rounded-full mx-auto" />
+        <div className="animate-spin w-8 h-8 border-4 border-coffee border-t-transparent mx-auto" />
       </div>
     );
   }
@@ -66,15 +66,15 @@ export default function OblíbenéPage() {
         <p className="text-4xl mb-4" aria-hidden="true">
           ♡
         </p>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+        <h1 className="text-2xl font-black text-black dark:text-white mb-2 uppercase">
           Žádné oblíbené
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 mb-6">
+        <p className="text-black dark:text-white mb-6">
           Zatím jste si nepřidali žádnou recenzi do oblíbených.
         </p>
         <Link
           href="/"
-          className="inline-flex items-center px-4 py-2 bg-coffee text-white rounded-lg hover:bg-opacity-90 transition-colors"
+          className="inline-flex items-center px-4 py-2 bg-coffee text-white font-bold uppercase tracking-wide border-[3px] border-black hover:bg-black hover:text-coffee"
         >
           Procházet recenze
         </Link>
@@ -85,16 +85,16 @@ export default function OblíbenéPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+        <h1 className="text-4xl font-black text-black dark:text-white mb-2 uppercase tracking-tight">
           Oblíbené recenze
         </h1>
-        <p className="text-gray-500 dark:text-gray-400">
+        <p className="text-black dark:text-white font-bold">
           {favourites.length} {favourites.length === 1 ? "recenze" : favourites.length < 5 ? "recenze" : "recenzí"} uloženo
         </p>
       </div>
 
       {loading && (
-        <div className="text-center py-4 text-gray-500 dark:text-gray-400 text-sm mb-4">
+        <div className="text-center py-4 text-black dark:text-white text-sm mb-4 font-bold uppercase">
           Načítání detailů...
         </div>
       )}
@@ -105,21 +105,21 @@ export default function OblíbenéPage() {
           return (
             <article
               key={fav.slug}
-              className="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 p-4 md:p-6"
+              className="bg-white dark:bg-black border-[3px] border-black dark:border-white p-4 md:p-6"
             >
               <div className="flex items-start justify-between gap-4 mb-3">
                 <div className="flex-1">
                   <Link
                     href={`/recenze/${fav.slug}`}
-                    className="text-lg font-semibold text-gray-900 dark:text-gray-100 hover:text-coffee transition-colors"
+                    className="text-lg font-black text-black dark:text-white hover:text-coffee uppercase"
                   >
                     {review?.name ?? fav.slug}
                   </Link>
                   {review?.roaster && (
-                    <p className="text-coffee text-sm mt-0.5">{review.roaster}</p>
+                    <p className="text-coffee text-sm mt-0.5 font-bold uppercase tracking-wide">{review.roaster}</p>
                   )}
                   {review?.origin && (
-                    <p className="text-gray-500 dark:text-gray-400 text-sm">
+                    <p className="text-black dark:text-white text-sm">
                       {review.origin}
                     </p>
                   )}
@@ -133,16 +133,16 @@ export default function OblíbenéPage() {
               </div>
 
               {review?.tastingNotes && (
-                <p className="text-sm text-gray-600 dark:text-gray-300 italic mb-3">
+                <p className="text-sm text-black dark:text-white mb-3 border-l-4 border-coffee pl-3">
                   {review.tastingNotes}
                 </p>
               )}
 
-              <div className="border-t border-gray-100 dark:border-gray-800 pt-3">
+              <div className="border-t-2 border-black dark:border-white pt-3">
                 <UserNote slug={fav.slug} />
               </div>
 
-              <p className="text-xs text-gray-400 mt-3">
+              <p className="text-xs text-black/50 dark:text-white/50 mt-3 font-bold uppercase">
                 Přidáno: {new Date(fav.addedAt).toLocaleDateString("cs-CZ")}
               </p>
             </article>

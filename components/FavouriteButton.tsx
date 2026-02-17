@@ -22,7 +22,7 @@ export default function FavouriteButton({
   if (!mounted) {
     return (
       <button
-        className={`p-2 rounded-full text-gray-300 ${className}`}
+        className={`p-2 border-2 border-black dark:border-white text-black dark:text-white ${className}`}
         aria-label="Oblíbené"
         disabled
       >
@@ -44,8 +44,10 @@ export default function FavouriteButton({
   return (
     <button
       onClick={toggle}
-      className={`p-2 rounded-full transition-colors hover:bg-red-50 dark:hover:bg-red-950 ${
-        favourite ? "text-red-500" : "text-gray-300 hover:text-red-400"
+      className={`p-2 border-2 border-black dark:border-white ${
+        favourite
+          ? "bg-red-500 text-white"
+          : "text-black dark:text-white hover:bg-red-500 hover:text-white"
       } ${className}`}
       aria-label={favourite ? "Odebrat z oblíbených" : "Přidat do oblíbených"}
       title={favourite ? "Odebrat z oblíbených" : "Přidat do oblíbených"}

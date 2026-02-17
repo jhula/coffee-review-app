@@ -33,7 +33,7 @@ export default function SearchBar({ defaultValue = "" }: SearchBarProps) {
     <div className="relative">
       <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
         <svg
-          className="w-4 h-4 text-gray-400"
+          className="w-4 h-4 text-black dark:text-white"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -51,8 +51,8 @@ export default function SearchBar({ defaultValue = "" }: SearchBarProps) {
         type="search"
         defaultValue={defaultValue}
         onChange={(e) => handleSearch(e.target.value)}
-        placeholder="Hledat recenze..."
-        className={`w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-coffee text-sm transition-opacity ${
+        placeholder="HLEDAT RECENZE..."
+        className={`w-full pl-10 pr-4 py-2 border-[3px] border-black dark:border-white bg-white dark:bg-black text-black dark:text-white placeholder-black/40 dark:placeholder-white/40 focus:outline-none focus:border-coffee text-sm font-mono uppercase ${
           isPending ? "opacity-70" : ""
         }`}
         aria-label="Hledat recenze"

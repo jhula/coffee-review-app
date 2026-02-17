@@ -25,8 +25,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="cs">
-      <body className="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen">
-        <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
+      <body className="bg-white dark:bg-black text-black dark:text-white min-h-screen font-mono">
+        <header className="bg-white dark:bg-black border-b-4 border-black dark:border-white sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav
               className="flex items-center justify-between h-16"
@@ -34,7 +34,7 @@ export default function RootLayout({
             >
               <Link
                 href="/"
-                className="flex items-center gap-2 text-xl font-bold text-coffee hover:opacity-80 transition-opacity"
+                className="flex items-center gap-2 text-xl font-black uppercase tracking-wider text-coffee hover:text-black dark:hover:text-white"
               >
                 <span aria-hidden="true">☕</span>
                 <span>Coffee Review</span>
@@ -43,13 +43,13 @@ export default function RootLayout({
               <div className="flex items-center gap-1 sm:gap-4">
                 <Link
                   href="/"
-                  className="px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-coffee dark:hover:text-coffee transition-colors rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
+                  className="px-3 py-2 text-sm font-bold uppercase tracking-wide text-black dark:text-white border-2 border-transparent hover:border-black dark:hover:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
                 >
                   Recenze
                 </Link>
                 <Link
                   href="/oblibene"
-                  className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-coffee dark:hover:text-coffee transition-colors rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
+                  className="flex items-center px-3 py-2 text-sm font-bold uppercase tracking-wide text-black dark:text-white border-2 border-transparent hover:border-black dark:hover:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
                 >
                   Oblíbené
                   <NavFavouritesBadge />
@@ -63,14 +63,14 @@ export default function RootLayout({
           {children}
         </main>
 
-        <footer className="mt-16 border-t border-gray-200 dark:border-gray-800 py-8 text-center text-sm text-gray-500 dark:text-gray-400">
+        <footer className="mt-16 border-t-4 border-black dark:border-white py-8 text-center text-sm text-black dark:text-white uppercase tracking-wide">
           <p>
             Data pocházejí z{" "}
             <a
               href="https://www.coffeereview.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-coffee hover:underline"
+              className="text-coffee font-bold hover:bg-coffee hover:text-white px-1"
             >
               coffeereview.com
             </a>

@@ -25,6 +25,12 @@ export default function Pagination({
     return `/?${qs}`;
   };
 
+  const linkClass =
+    "px-3 py-2 text-sm border-[3px] border-black dark:border-white text-black dark:text-white font-bold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black";
+
+  const navLinkClass =
+    "px-4 py-2 text-sm font-black border-[3px] border-black dark:border-white text-black dark:text-white uppercase tracking-wide hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black";
+
   return (
     <nav
       className="flex items-center justify-center gap-2 mt-8"
@@ -33,7 +39,7 @@ export default function Pagination({
       {currentPage > 1 && (
         <Link
           href={buildUrl(currentPage - 1)}
-          className="px-4 py-2 text-sm font-medium border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+          className={navLinkClass}
           aria-label="Předchozí stránka"
         >
           ← Předchozí
@@ -45,12 +51,12 @@ export default function Pagination({
           <>
             <Link
               href={buildUrl(1)}
-              className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+              className={linkClass}
             >
               1
             </Link>
             {currentPage > 3 && (
-              <span className="px-2 text-gray-400">...</span>
+              <span className="px-2 text-black dark:text-white font-bold">...</span>
             )}
           </>
         )}
@@ -58,20 +64,20 @@ export default function Pagination({
         {currentPage > 1 && (
           <Link
             href={buildUrl(currentPage - 1)}
-            className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+            className={linkClass}
           >
             {currentPage - 1}
           </Link>
         )}
 
-        <span className="px-3 py-2 text-sm bg-coffee text-white rounded-lg font-medium">
+        <span className="px-3 py-2 text-sm bg-coffee text-white font-black border-[3px] border-black">
           {currentPage}
         </span>
 
         {hasNextPage && (
           <Link
             href={buildUrl(currentPage + 1)}
-            className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+            className={linkClass}
           >
             {currentPage + 1}
           </Link>
@@ -81,7 +87,7 @@ export default function Pagination({
       {hasNextPage && (
         <Link
           href={buildUrl(currentPage + 1)}
-          className="px-4 py-2 text-sm font-medium border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+          className={navLinkClass}
           aria-label="Další stránka"
         >
           Další →

@@ -61,11 +61,11 @@ export default async function ReviewPage({ params }: PageProps) {
     <div>
       <ReviewDetail review={review} />
       <div className="max-w-3xl mx-auto mt-6">
-        <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 p-6">
-          <h2 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+        <div className="bg-white dark:bg-black border-[3px] border-black dark:border-white p-6">
+          <h2 className="font-black text-black dark:text-white mb-1 uppercase tracking-wide">
             Moje poznámky
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+          <p className="text-sm text-black/60 dark:text-white/60 mb-4">
             Hodnocení a poznámky se ukládají pouze ve vašem prohlížeči.
           </p>
           <UserNote slug={review.slug} />

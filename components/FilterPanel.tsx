@@ -58,8 +58,8 @@ export default function FilterPanel({
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Minimální skóre: <span className="font-bold text-coffee">{minScore}</span>
+        <label className="block text-sm font-bold text-black dark:text-white mb-2 uppercase tracking-wide">
+          Minimální skóre: <span className="font-black text-coffee">{minScore}</span>
         </label>
         <input
           type="range"
@@ -70,7 +70,7 @@ export default function FilterPanel({
           className="w-full accent-coffee"
           aria-label="Minimální skóre"
         />
-        <div className="flex justify-between text-xs text-gray-400 mt-1">
+        <div className="flex justify-between text-xs text-black dark:text-white mt-1 font-bold">
           <span>0</span>
           <span>100</span>
         </div>
@@ -79,7 +79,7 @@ export default function FilterPanel({
       <div>
         <label
           htmlFor="sort-select"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          className="block text-sm font-bold text-black dark:text-white mb-2 uppercase tracking-wide"
         >
           Řadit podle
         </label>
@@ -87,7 +87,7 @@ export default function FilterPanel({
           id="sort-select"
           value={sortBy}
           onChange={(e) => updateParam({ sort: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-coffee"
+          className="w-full px-3 py-2 border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white text-sm font-mono focus:outline-none focus:border-coffee"
         >
           <option value="score-desc">Skóre (nejvyšší)</option>
           <option value="score-asc">Skóre (nejnižší)</option>
@@ -98,7 +98,7 @@ export default function FilterPanel({
 
       {origins.length > 0 && (
         <div>
-          <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <p className="text-sm font-bold text-black dark:text-white mb-2 uppercase tracking-wide">
             Původ
           </p>
           <div className="space-y-1 max-h-48 overflow-y-auto">
@@ -111,9 +111,9 @@ export default function FilterPanel({
                   type="checkbox"
                   checked={selectedOrigins.includes(origin)}
                   onChange={() => handleOriginToggle(origin)}
-                  className="rounded border-gray-300 text-coffee focus:ring-coffee"
+                  className="border-2 border-black dark:border-white text-coffee focus:ring-0 accent-coffee"
                 />
-                <span className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-coffee transition-colors">
+                <span className="text-sm text-black dark:text-white font-bold group-hover:text-coffee">
                   {origin}
                 </span>
               </label>
@@ -127,7 +127,7 @@ export default function FilterPanel({
           onClick={() =>
             updateParam({ minScore: null, origins: null, sort: null })
           }
-          className="text-sm text-red-500 hover:text-red-600 hover:underline"
+          className="text-sm text-white bg-black dark:text-black dark:bg-white font-bold uppercase tracking-wide px-3 py-1 border-2 border-black dark:border-white hover:bg-coffee hover:text-white hover:border-coffee"
         >
           Zrušit filtry
         </button>
