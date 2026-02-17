@@ -1,8 +1,19 @@
 import { scrapeReviewList } from "@/lib/scraper";
 import { NextRequest } from "next/server";
 
-export const revalidate = 3600; // 1 hodina ISR cache
+/**
+ * ISR cache duration in seconds (1 hour).
+ * Next.js will serve stale HTML until this expires, then re-scrape in the background.
+ */
+export const revalidate = 3600;
 
+/**
+ * GET /api/reviews?page=<n>
+ *
+ * Returns a JSON array of Review objects for the requested page.
+ * Only lightweight fields are populated (slug, name, roaster, score) –
+ * detail fields (origin, price, notes) require a separate call to /api/review/[slug].
+ */
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const page = Number(searchParams.get("page") ?? "1");

@@ -4,8 +4,9 @@ import ReviewDetail from "@/components/ReviewDetail";
 import UserNote from "@/components/UserNote";
 import { Review } from "@/lib/types";
 
+// Next.js 16+: params is a Promise
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 async function getReview(slug: string): Promise<Review | null> {
@@ -30,7 +31,8 @@ async function getReview(slug: string): Promise<Review | null> {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const review = await getReview(params.slug);
+  const { slug } = await params;
+  const review = await getReview(slug);
 
   if (!review) {
     return { title: "Recenze nenalezena" };
@@ -48,7 +50,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ReviewPage({ params }: PageProps) {
-  const review = await getReview(params.slug);
+  const { slug } = await params;
+  const review = await getReview(slug);
 
   if (!review) {
     notFound();

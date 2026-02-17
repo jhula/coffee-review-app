@@ -12,10 +12,18 @@ export const metadata: Metadata = {
     "Procházejte recenze výběrové kávy z coffeereview.com s českým rozhraním.",
 };
 
+/** Number of review cards shown per page (client-side slice of the scraped batch). */
 const ITEMS_PER_PAGE = 12;
 
+/**
+ * Fetches a page of reviews from the internal API route.
+ * Uses an absolute URL because this runs inside a Server Component.
+ * Falls back gracefully to an empty array on any network or parse error.
+ */
 async function getReviews(page: number): Promise<Review[]> {
   try {
+    // Absolute URL required in Server Components; prefer explicit env var,
+    // then Vercel's auto-set VERCEL_URL, then localhost for local dev.
     const baseUrl =
       process.env.NEXT_PUBLIC_BASE_URL ??
       (process.env.VERCEL_URL
@@ -34,6 +42,12 @@ async function getReviews(page: number): Promise<Review[]> {
   }
 }
 
+/**
+ * Pure function that applies search, score filter, origin filter and sort
+ * to the full review array received from the API.
+ * All filtering is done client-side (server component, no JS sent to browser)
+ * so the result is ready to slice into pages.
+ */
 function filterAndSort(
   reviews: Review[],
   {
