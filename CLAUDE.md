@@ -2,6 +2,23 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Environment
+
+**Runtime & package manager: [Bun](https://bun.sh)** — always use `bun` instead of `node`/`npm`/`npx`.
+
+```bash
+bun install          # install dependencies
+bunx <package>       # run a package binary (replaces npx)
+```
+
+Before assuming any CLI tool (e.g. `gh`, `vercel`) is missing, verify with:
+
+```bash
+which <tool>
+# or
+<tool> --version
+```
+
 ## Commands
 
 ```bash
@@ -42,14 +59,15 @@ coffee-review-app/
 │   ├── Pagination.tsx                # Page links using URL ?page=
 │   ├── ScoreIndicator.tsx            # Coloured score circle
 │   └── NavFavouritesBadge.tsx        # Count badge in nav (hydration-safe)
-├── tailwind.config.ts                # coffee: #C45B2E, dark mode: "class"
+├── app/globals.css                   # Tailwind 4 @theme: coffee: #C45B2E, dark mode via "class"
 ├── next.config.mjs                   # remotePatterns for coffeereview.com images
+├── eslint.config.mjs                 # ESLint 10 flat config
 └── CLAUDE.md
 ```
 
 ## Architecture
 
-Next.js 14 App Router app that scrapes coffee reviews from coffeereview.com, caches them via ISR, and lets users save favourites in localStorage.
+Next.js 16 App Router app that scrapes coffee reviews from coffeereview.com, caches them via ISR, and lets users save favourites in localStorage.
 
 ### Data flow
 
@@ -66,6 +84,12 @@ The scraper is the only place that talks to coffeereview.com. All page data goes
 ### Scraper (`lib/scraper.ts`)
 
 Uses multiple fallback CSS selectors because coffeereview.com's markup can vary. Primary selectors are class-based (`.review-template`, `.roaster-name`, etc.); if they yield nothing, broader element selectors are tried. Slugs are extracted via regex `/\/review\/([^/]+)\/?$/` from href attributes. All errors throw with Czech messages.
+
+**Before modifying selectors:** always fetch a sample page and inspect the live HTML structure first — do not guess selectors from memory or previous versions of the site:
+
+```bash
+curl -s -A "Mozilla/5.0" "https://www.coffeereview.com/review/" | grep -E 'class="[^"]*review'
+```
 
 ### Favourites store (`store/favourites.ts`)
 
