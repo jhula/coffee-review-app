@@ -15,8 +15,7 @@ export const revalidate = 3600;
  * detail fields (origin, price, notes) require a separate call to /api/review/[slug].
  */
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const page = Number(searchParams.get("page") ?? "1");
+  const page = Number(request.nextUrl.searchParams.get("page") ?? "1");
 
   try {
     const reviews = await scrapeReviewList(page);

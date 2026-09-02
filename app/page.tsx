@@ -101,22 +101,23 @@ function filterAndSort(
 }
 
 type PageProps = {
-  searchParams: {
+  searchParams: Promise<{
     page?: string;
     q?: string;
     minScore?: string;
     sort?: string;
     origins?: string;
-  };
+  }>;
 };
 
 export default async function HomePage({ searchParams }: PageProps) {
-  const page = Math.max(1, Number(searchParams.page ?? "1"));
-  const query = searchParams.q ?? "";
-  const minScore = Number(searchParams.minScore ?? "0");
-  const sortBy = searchParams.sort ?? "score-desc";
-  const selectedOrigins = searchParams.origins
-    ? searchParams.origins.split(",").filter(Boolean)
+  const resolvedParams = await searchParams;
+  const page = Math.max(1, Number(resolvedParams.page ?? "1"));
+  const query = resolvedParams.q ?? "";
+  const minScore = Number(resolvedParams.minScore ?? "0");
+  const sortBy = resolvedParams.sort ?? "score-desc";
+  const selectedOrigins = resolvedParams.origins
+    ? resolvedParams.origins.split(",").filter(Boolean)
     : [];
 
   const allReviews = await getReviews(page);

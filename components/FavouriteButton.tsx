@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useFavouritesStore } from "@/store/favourites";
+import { useIsMounted } from "@/lib/useIsMounted";
 
 type FavouriteButtonProps = {
   slug: string;
@@ -12,12 +12,8 @@ export default function FavouriteButton({
   slug,
   className = "",
 }: FavouriteButtonProps) {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsMounted();
   const { isFavourite, addFavourite, removeFavourite } = useFavouritesStore();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   if (!mounted) {
     return (

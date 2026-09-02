@@ -46,7 +46,8 @@ coffee-review-app/
 │       └── review/[slug]/route.ts    # GET /api/review/:slug
 ├── lib/
 │   ├── types.ts                      # Review, UserFavourite types
-│   └── scraper.ts                    # scrapeReviewList + scrapeReviewDetail (Cheerio)
+│   ├── scraper.ts                    # scrapeReviewList + scrapeReviewDetail (Cheerio)
+│   └── useIsMounted.ts               # Hydration-safe useSyncExternalStore hook
 ├── store/
 │   └── favourites.ts                 # Zustand store + localStorage persist middleware
 ├── components/
@@ -61,7 +62,7 @@ coffee-review-app/
 │   └── NavFavouritesBadge.tsx        # Count badge in nav (hydration-safe)
 ├── app/globals.css                   # Tailwind 4 @theme: coffee: #C45B2E, dark mode via "class"
 ├── next.config.mjs                   # remotePatterns for coffeereview.com images
-├── eslint.config.mjs                 # ESLint 10 flat config
+├── eslint.config.mjs                 # ESLint flat config (eslint-config-next/core-web-vitals)
 └── CLAUDE.md
 ```
 
@@ -93,11 +94,10 @@ curl -s -A "Mozilla/5.0" "https://www.coffeereview.com/review/" | grep -E 'class
 
 ### Favourites store (`store/favourites.ts`)
 
-Zustand store with `persist` middleware — localStorage key `"coffee-favourites"`. All components that read this store check a `mounted` state flag before rendering to prevent SSR hydration mismatches:
+Zustand store with `persist` middleware — localStorage key `"coffee-favourites"`. All components that read this store check hydration state with `useIsMounted()` before rendering to prevent SSR hydration mismatches:
 
 ```tsx
-const [mounted, setMounted] = useState(false);
-useEffect(() => setMounted(true), []);
+const mounted = useIsMounted();
 if (!mounted) return <Skeleton />;
 ```
 

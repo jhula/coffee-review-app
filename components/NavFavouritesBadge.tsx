@@ -1,15 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useFavouritesStore } from "@/store/favourites";
+import { useIsMounted } from "@/lib/useIsMounted";
 
 export default function NavFavouritesBadge() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsMounted();
   const favourites = useFavouritesStore((s) => s.favourites);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   if (!mounted || favourites.length === 0) return null;
 

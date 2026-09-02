@@ -1,56 +1,58 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useFavouritesStore } from "@/store/favourites";
+import { useIsMounted } from "@/lib/useIsMounted";
 import UserNote from "@/components/UserNote";
 import ScoreIndicator from "@/components/ScoreIndicator";
 import FavouriteButton from "@/components/FavouriteButton";
 import { Review } from "@/lib/types";
 
-export default function OblíbenéPage() {
-  const [mounted, setMounted] = useState(false);
+export default function OblibenePage() {
+  const mounted = useIsMounted();
   const { favourites } = useFavouritesStore();
   const [reviews, setReviews] = useState<Record<string, Review>>({});
-  const [loading, setLoading] = useState(true);
+
+  const missingSlugs = useMemo(
+    () =>
+      mounted
+        ? favourites.map((f) => f.slug).filter((s) => !reviews[s])
+        : [],
+    [mounted, favourites, reviews]
+  );
+  const loading = missingSlugs.length > 0;
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted || favourites.length === 0) {
-      setLoading(false);
+    if (!mounted || missingSlugs.length === 0) {
       return;
     }
 
-    const slugs = favourites.map((f) => f.slug);
-    const missing = slugs.filter((s) => !reviews[s]);
+    let isCancelled = false;
 
-    if (missing.length === 0) {
-      setLoading(false);
-      return;
-    }
-
-    setLoading(true);
     Promise.allSettled(
-      missing.map((slug) =>
+      missingSlugs.map((slug) =>
         fetch(`/api/review/${slug}`)
           .then((r) => r.json())
           .then((data) => ({ slug, data }))
       )
     ).then((results) => {
-      const newReviews: Record<string, Review> = { ...reviews };
-      results.forEach((result) => {
-        if (result.status === "fulfilled" && !result.value.data.error) {
-          newReviews[result.value.slug] = result.value.data;
-        }
+      if (isCancelled) return;
+      setReviews((prev) => {
+        const next = { ...prev };
+        results.forEach((result) => {
+          if (result.status === "fulfilled" && !result.value.data.error) {
+            next[result.value.slug] = result.value.data;
+          }
+        });
+        return next;
       });
-      setReviews(newReviews);
-      setLoading(false);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mounted, favourites.length]); // intentionally only re-run when count changes to avoid fetch loop
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [mounted, missingSlugs]);
 
   if (!mounted) {
     return (
